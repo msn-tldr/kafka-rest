@@ -905,11 +905,22 @@ public class KafkaRestConfig extends RestConfig {
     this(config, props);
   }
 
+  public KafkaRestConfig(Properties props, String jmxPrefix) {
+    this(config, props, jmxPrefix);
+  }
+
   public KafkaRestConfig(ConfigDef configDef, Properties props) {
     super(configDef, props);
     metricsContext =
         new KafkaRestMetricsContext(
             getString(METRICS_JMX_PREFIX_CONFIG), originalsWithPrefix(METRICS_CONTEXT_PREFIX));
+  }
+
+  public KafkaRestConfig(ConfigDef configDef, Properties props, String jmxPrefix) {
+    super(configDef, props);
+    log.info("MSN-kafka-rest: jmxPrefix is {}", jmxPrefix);
+    metricsContext =
+        new KafkaRestMetricsContext(jmxPrefix, originalsWithPrefix(METRICS_CONTEXT_PREFIX));
   }
 
   public KafkaRestConfig(ConfigDef configDef, Properties props, Time time) {
