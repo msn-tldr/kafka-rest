@@ -82,6 +82,7 @@ public class KafkaRestApplication extends Application<KafkaRestConfig> {
 
   public KafkaRestApplication(KafkaRestConfig config, String path, String listenerName) {
     this(config, path, listenerName, null /* requestLogWriter */, null /* requestLogFormat */);
+    log.info("MSN: krestapp ctor.");
   }
 
   /* This public-constructor exists to facilitate testing with a custom requestLogWriter, and
@@ -98,6 +99,7 @@ public class KafkaRestApplication extends Application<KafkaRestConfig> {
         path,
         listenerName,
         createRequestLog(config, requestLogWriter, requestLogFormat, log, listenerName));
+    log.info("MSN: krestapp new ctor.");
 
     restResourceExtensions =
         config.getConfiguredInstances(
@@ -115,6 +117,8 @@ public class KafkaRestApplication extends Application<KafkaRestConfig> {
       String requestLogFormat,
       Logger log,
       String listenerName) {
+    log.info("MSN: createRequestLog custom-logging-config {}",
+        config.getBoolean(KafkaRestConfig.USE_CUSTOM_REQUEST_LOGGING_CONFIG));
     if (config.getBoolean(KafkaRestConfig.USE_CUSTOM_REQUEST_LOGGING_CONFIG)) {
       log.info("For rest-app with listener {}, configuring custom request logging", listenerName);
       if (requestLogWriter == null) {
