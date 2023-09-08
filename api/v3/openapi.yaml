@@ -4363,8 +4363,7 @@ components:
                 message: "resource_type cannot be unspecified or UNKNOWN"
 
     BadRequestErrorResponse_ProduceRecords:
-      description: 'Indicates a bad request error. It could be caused by an unexpected request
-        body format or other forms of request validation failure.'
+      description: 'Indicates a bad request error. It could be caused by an unexpected request body format or other forms of request validation failure.'
       content:
         application/json:
           schema:
